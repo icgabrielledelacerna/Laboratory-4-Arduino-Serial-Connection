@@ -2,7 +2,6 @@ const int photoResistorPin = A2;
 const int ledPin = 12;
 const int lightThreshold = 150;
 bool thresholdMet = false;
-bool commandGiven = false;
 
 void setup() {
   pinMode(ledPin, OUTPUT);
@@ -24,7 +23,6 @@ void loop() {
 
     if (command == "stop") {
       thresholdMet = false;
-      commandGiven = true;
       digitalWrite(ledPin, LOW);
       Serial.println("LED light blinking has been stopped.");
     } else {
@@ -32,7 +30,7 @@ void loop() {
     }
   }
 
-  if (mappedLight >= lightThreshold && !commandGiven) {
+  if (mappedLight >= lightThreshold) {
     thresholdMet = true;
   }
   
@@ -44,7 +42,3 @@ void loop() {
     delay(100);
   }
 }
-
-
-
-
